@@ -1,75 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>区块链 on Pheglovog</title><link>https://pheglovog.github.io/pheglovog-site/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link><description>Recent content in 区块链 on Pheglovog</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://pheglovog.github.io/pheglovog-site/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>CarLife 区块链汽车生活平台开发经验</title><link>https://pheglovog.github.io/pheglovog-site/posts/carlife-experience/</link><pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate><guid>https://pheglovog.github.io/pheglovog-site/posts/carlife-experience/</guid><description>&lt;h2 id="项目背景">项目背景&lt;/h2>
-&lt;p>CarLife 是一个基于 Ethereum 区块链的汽车生活平台，利用区块链技术记录车辆的完整生命周期信息。&lt;/p>
-&lt;h2 id="核心功能">核心功能&lt;/h2>
-&lt;h3 id="1-车辆-nft-erc721">1. 车辆 NFT (ERC721)&lt;/h3>
-&lt;p>每辆车被铸造为一个独特的 NFT，包含：&lt;/p>
-&lt;ul>
-&lt;li>车辆基本信息（VIN、品牌、型号）&lt;/li>
-&lt;li>里程记录&lt;/li>
-&lt;li>维修历史&lt;/li>
-&lt;li>车主信息&lt;/li>
-&lt;/ul>
-&lt;h3 id="2-服务商注册">2. 服务商注册&lt;/h3>
-&lt;p>智能合约允许服务商注册：&lt;/p>
-&lt;ul>
-&lt;li>汽车维修店&lt;/li>
-&lt;li>保险公司&lt;/li>
-&lt;li>加油站&lt;/li>
-&lt;li>洗车店&lt;/li>
-&lt;/ul>
-&lt;h3 id="3-评价系统">3. 评价系统&lt;/h3>
-&lt;p>用户可以对服务商进行评分和评价，所有记录存储在区块链上，不可篡改。&lt;/p>
-&lt;h3 id="4-数据-token">4. 数据 Token&lt;/h3>
-&lt;p>使用 ERC20 标准的 Data Token 激励用户分享车辆数据。&lt;/p>
-&lt;h2 id="技术栈">技术栈&lt;/h2>
-&lt;ul>
-&lt;li>&lt;strong>智能合约&lt;/strong>: Solidity&lt;/li>
-&lt;li>&lt;strong>标准&lt;/strong>: ERC721, ERC20&lt;/li>
-&lt;li>&lt;strong>库&lt;/strong>: OpenZeppelin&lt;/li>
-&lt;li>&lt;strong>后端&lt;/strong>: FastAPI (Python)&lt;/li>
-&lt;li>&lt;strong>前端&lt;/strong>: HTML/CSS/JavaScript&lt;/li>
-&lt;li>&lt;strong>Web3 库&lt;/strong>: Ethers.js&lt;/li>
-&lt;/ul>
-&lt;h2 id="开发经验">开发经验&lt;/h2>
-&lt;h3 id="1-solidity-学习">1. Solidity 学习&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-solidity" data-lang="solidity">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">// SPDX-License-Identifier: MIT
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">&lt;/span>&lt;span style="color:#ff7b72">pragma solidity&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">^&lt;/span>&lt;span style="color:#a5d6ff">0&lt;/span>.&lt;span style="color:#a5d6ff">8&lt;/span>.&lt;span style="color:#a5d6ff">0&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">import&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;@openzeppelin/contracts/token/ERC721/ERC721.sol&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">import&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;@openzeppelin/contracts/access/Ownable.sol&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">contract&lt;/span> &lt;span style="color:#f0883e;font-weight:bold">CarNFT&lt;/span> &lt;span style="color:#ff7b72">is&lt;/span> ERC721, Ownable {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">struct&lt;/span> &lt;span style="color:#f0883e;font-weight:bold">Car&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> vin;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> brand;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> model;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">uint256&lt;/span> mileage;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">address&lt;/span> owner;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">mapping&lt;/span>(&lt;span style="color:#ff7b72">uint256&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&amp;gt;&lt;/span> Car) &lt;span style="color:#ff7b72">public&lt;/span> cars;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">uint256&lt;/span> &lt;span style="color:#ff7b72">private&lt;/span> _tokenIdCounter;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">constructor&lt;/span>() ERC721(&lt;span style="color:#a5d6ff">&amp;#34;CarLife Car&amp;#34;&lt;/span>, &lt;span style="color:#a5d6ff">&amp;#34;CLCAR&amp;#34;&lt;/span>) {}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">function&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">mintCar&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> &lt;span style="color:#ff7b72">memory&lt;/span> vin,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> &lt;span style="color:#ff7b72">memory&lt;/span> brand,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">string&lt;/span> &lt;span style="color:#ff7b72">memory&lt;/span> model
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) &lt;span style="color:#ff7b72">public&lt;/span> &lt;span style="color:#ff7b72">returns&lt;/span> (&lt;span style="color:#ff7b72">uint256&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">uint256&lt;/span> tokenId &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> _tokenIdCounter;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _tokenIdCounter&lt;span style="color:#ff7b72;font-weight:bold">++&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _mint(msg.sender, tokenId);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cars[tokenId] &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> Car(vin, brand, model, &lt;span style="color:#a5d6ff">0&lt;/span>, msg.sender);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">return&lt;/span> tokenId;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">function&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">updateMileage&lt;/span>(&lt;span style="color:#ff7b72">uint256&lt;/span> tokenId, &lt;span style="color:#ff7b72">uint256&lt;/span> newMileage) &lt;span style="color:#ff7b72">public&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> require(_isApprovedOrOwner(_msgSender(), tokenId), &lt;span style="color:#a5d6ff">&amp;#34;Not authorized&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cars[tokenId].mileage &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> newMileage;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-openzeppelin-库使用">2. OpenZeppelin 库使用&lt;/h3>
-&lt;p>OpenZeppelin 提供了经过审计的安全合约：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>区块链 on Pheglovog</title>
+    <link>https://pheglovog.github.io/pheglovog-site/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <description>Recent content in 区块链 on Pheglovog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 01 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://pheglovog.github.io/pheglovog-site/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CarLife 区块链汽车生活平台开发经验</title>
+      <link>https://pheglovog.github.io/pheglovog-site/posts/carlife-experience/</link>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://pheglovog.github.io/pheglovog-site/posts/carlife-experience/</guid>
+      <description>&lt;h2 id=&#34;项目背景&#34;&gt;项目背景&lt;/h2&gt;&#xA;&lt;p&gt;CarLife 是一个基于 Ethereum 区块链的汽车生活平台，利用区块链技术记录车辆的完整生命周期信息。&lt;/p&gt;&#xA;&lt;h2 id=&#34;核心功能&#34;&gt;核心功能&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-车辆-nft-erc721&#34;&gt;1. 车辆 NFT (ERC721)&lt;/h3&gt;&#xA;&lt;p&gt;每辆车被铸造为一个独特的 NFT，包含：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;车辆基本信息（VIN、品牌、型号）&lt;/li&gt;&#xA;&lt;li&gt;里程记录&lt;/li&gt;&#xA;&lt;li&gt;维修历史&lt;/li&gt;&#xA;&lt;li&gt;车主信息&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-服务商注册&#34;&gt;2. 服务商注册&lt;/h3&gt;&#xA;&lt;p&gt;智能合约允许服务商注册：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;汽车维修店&lt;/li&gt;&#xA;&lt;li&gt;保险公司&lt;/li&gt;&#xA;&lt;li&gt;加油站&lt;/li&gt;&#xA;&lt;li&gt;洗车店&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-评价系统&#34;&gt;3. 评价系统&lt;/h3&gt;&#xA;&lt;p&gt;用户可以对服务商进行评分和评价，所有记录存储在区块链上，不可篡改。&lt;/p&gt;&#xA;&lt;h3 id=&#34;4-数据-token&#34;&gt;4. 数据 Token&lt;/h3&gt;&#xA;&lt;p&gt;使用 ERC20 标准的 Data Token 激励用户分享车辆数据。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术栈&#34;&gt;技术栈&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;智能合约&lt;/strong&gt;: Solidity&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;标准&lt;/strong&gt;: ERC721, ERC20&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;库&lt;/strong&gt;: OpenZeppelin&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;后端&lt;/strong&gt;: FastAPI (Python)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;前端&lt;/strong&gt;: HTML/CSS/JavaScript&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Web3 库&lt;/strong&gt;: Ethers.js&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;开发经验&#34;&gt;开发经验&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-solidity-学习&#34;&gt;1. Solidity 学习&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// SPDX-License-Identifier: MIT&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;pragma solidity&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;@openzeppelin/contracts/token/ERC721/ERC721.sol&amp;#34;&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;@openzeppelin/contracts/access/Ownable.sol&amp;#34;&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;contract&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CarNFT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;is&lt;/span&gt; ERC721, Ownable {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Car&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; vin;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; brand;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; model;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; mileage;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;address&lt;/span&gt; owner;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;mapping&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; Car) &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; cars;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; _tokenIdCounter;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;constructor&lt;/span&gt;() ERC721(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CarLife Car&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CLCAR&amp;#34;&lt;/span&gt;) {}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mintCar&lt;/span&gt;(&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;memory&lt;/span&gt; vin,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;memory&lt;/span&gt; brand,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;memory&lt;/span&gt; model&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ) &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;returns&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt;) {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; tokenId &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; _tokenIdCounter;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _tokenIdCounter&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _mint(msg.sender, tokenId);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cars[tokenId] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Car(vin, brand, model, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, msg.sender);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; tokenId;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;updateMileage&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; tokenId, &lt;span style=&#34;color:#66d9ef&#34;&gt;uint256&lt;/span&gt; newMileage) &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        require(_isApprovedOrOwner(_msgSender(), tokenId), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Not authorized&amp;#34;&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cars[tokenId].mileage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; newMileage;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-openzeppelin-库使用&#34;&gt;2. OpenZeppelin 库使用&lt;/h3&gt;&#xA;&lt;p&gt;OpenZeppelin 提供了经过审计的安全合约：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

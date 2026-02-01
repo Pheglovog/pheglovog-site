@@ -3,17 +3,10 @@ languageCode = 'zh-CN'
 title = 'Pheglovog'
 canonifyURLs = false
 
-# 禁用主题，使用自定义模板
-# theme = 'hugo-geekdoc'
-
 # 参数配置
 [params]
   description = "量化交易 | 区块链 | 全栈开发"
   title = "Pheglovog"
-  images = ["/images/avatar.png"]
-
-# 禁用模块
-disableKinds = ["taxonomy", "term"]
 
 # Markdown 配置
 [markup]
@@ -21,29 +14,8 @@ disableKinds = ["taxonomy", "term"]
     [markup.goldmark.renderer]
       unsafe = true
 
-  [markup.highlight]
-    style = "github-dark"
-    lineNos = false
-
-  [markup.tableOfContents]
-    startLevel = 1
-    endLevel = 9
-
-# 分类和标签
-[taxonomies]
-  tag = "tags"
-  category = "categories"
-
-# RSS 配置
-[services]
-  [services.rss]
-    limit = 20
-
-  [services.googleAnalytics]
-    id = ''
-
 # 输出配置
 [outputs]
-  home = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
+  home = ["HTML"]
+  section = ["HTML"]
   page = ["HTML"]

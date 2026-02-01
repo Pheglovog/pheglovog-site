@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="量化交易 | 区块链 | 全栈开发">
-  <title>项目 - Pheglovog</title>
-  <link rel="stylesheet" href="/css/custom.css">
-</head>
-<body>
-  <nav class="navbar">
-    <div class="navbar-content">
-      <a href="/" class="navbar-brand">Pheglovog</a>
-      <div class="navbar-links">
-        <a href="/" class="navbar-link">首页</a>
-        <a href="/projects/" class="navbar-link">项目</a>
-        <a href="/posts/" class="navbar-link">博客</a>
-        <a href="/about/" class="navbar-link">关于</a>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    
+{{ define "main" }}
 <section class="page-section" style="padding-top: 80px;">
   <div class="section-header">
     <h2 class="section-title">项目</h2>
@@ -29,7 +6,7 @@
   </div>
   
   <div class="grid">
-    
+    <!-- AlphaGPT -->
     <a href="https://github.com/Pheglovog/AlphaGPT" target="_blank" class="card">
       <span class="card-icon">📈</span>
       <h3 class="card-title">AlphaGPT</h3>
@@ -41,7 +18,7 @@
       </div>
     </a>
 
-    
+    <!-- CarLife -->
     <a href="https://github.com/Pheglovog/carlife-eth" target="_blank" class="card">
       <span class="card-icon">🚗</span>
       <h3 class="card-title">CarLife</h3>
@@ -53,7 +30,7 @@
       </div>
     </a>
 
-    
+    <!-- CurrencyExchange -->
     <a href="https://github.com/Pheglovog/CurrencyExchange" target="_blank" class="card">
       <span class="card-icon">💱</span>
       <h3 class="card-title">CurrencyExchange</h3>
@@ -67,14 +44,4 @@
   </div>
 </section>
 
-
-  </main>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <p class="footer-text">© 2026 Pheglovog</p>
-      <a href="https://github.com/Pheglovog" class="footer-link">GitHub</a>
-    </div>
-  </footer>
-</body>
-</html>
+{{ end }}
