@@ -1,0 +1,232 @@
+/* 自定义样式 - Pheglovog 博客 */
+
+/* 全局变量 */
+:root {
+  --primary-color: #409eff;
+  --secondary-color: #67c23a;
+  --accent-color: #e6a23c;
+  --danger-color: #f56c6c;
+  --dark-bg: #1a1a2e;
+  --card-bg: #242436;
+  --text-color: #e0e0e0;
+  --text-muted: #a0a0b0;
+}
+
+/* 主题覆盖 */
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+}
+
+/* 导航栏 */
+.geekdoc-header {
+  background: linear-gradient(135deg, #409eff 0%, #67c23a 100%);
+  padding: 1rem 0;
+}
+
+.geekdoc-header a {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* 文章卡片 */
+.post-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(64, 158, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(64, 158, 255, 0.2);
+}
+
+.post-title {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.post-title a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.post-excerpt {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin: 0.25rem;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}
+
+/* 代码块 */
+pre code {
+  background: #2d2d3f !important;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+code {
+  background: rgba(64, 158, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* 目录 */
+.geekdoc-toc {
+  background: var(--card-bg);
+  border: 1px solid rgba(64, 158, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.geekdoc-toc a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.geekdoc-toc a:hover {
+  text-decoration: underline;
+}
+
+/* 社交链接 */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.social-links a:hover {
+  transform: scale(1.2);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 阅读时间 */
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* 搜索框 */
+.search-box {
+  background: var(--card-bg);
+  border: 1px solid rgba(64, 158, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--text-color);
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-box::placeholder {
+  color: var(--text-muted);
+}
+
+/* 相关文章 */
+.related-posts {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(64, 158, 255, 0.2);
+}
+
+.related-posts h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* 分享按钮 */
+.share-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.share-btn {
+  background: var(--card-bg);
+  border: 1px solid rgba(64, 158, 255, 0.3);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.share-btn:hover {
+  background: rgba(64, 158, 255, 0.1);
+  border-color: var(--primary-color);
+}
+
+/* 评论区域 */
+.comments-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(64, 158, 255, 0.2);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .post-card {
+    padding: 1rem;
+  }
+
+  .post-title {
+    font-size: 1.25rem;
+  }
+}

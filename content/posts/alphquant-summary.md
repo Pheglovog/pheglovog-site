@@ -3,6 +3,7 @@ title: "AlphaQuant 中国股市量化系统开发总结"
 date: 2026-02-01
 tags: ["量化", "Python", "PyTorch"]
 categories: ["量化交易"]
+draft: false
 ---
 
 ## 项目概述
@@ -59,7 +60,7 @@ AlphaQuant 是一个基于符号回归的中国股市量化交易系统，专注
 
 ## 项目地址
 
-https://github.com/Pheglovog/AlphaGPT
+[GitHub](https://github.com/Pheglovog/AlphaGPT)
 
 ## 收获与总结
 
