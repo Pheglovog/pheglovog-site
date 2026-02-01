@@ -8,7 +8,31 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <a href="/" class="navbar-logo">🚀 Pheglovog</a>
+    <div class="navbar-links">
+      <a href="/" class="navbar-link">首页</a>
+      <a href="/projects/" class="navbar-link">项目</a>
+      <a href="/posts/" class="navbar-link">博客</a>
+      <a href="/about/" class="navbar-link">关于</a>
+    </div>
+  </nav>
+
   {{ block "main" . }}{{ end }}
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">© 2026 Pheglovog. All rights reserved.</p>
+      <p class="footer-motto">💪 持续学习，持续进步</p>
+      <div class="footer-links">
+        <a href="https://github.com/Pheglovog" target="_blank" class="footer-link">GitHub</a>
+        <a href="mailto:3042569263@qq.com" class="footer-link">Email</a>
+      </div>
+    </div>
+  </footer>
+
   <script src="/js/custom.js"></script>
 </body>
 </html>
