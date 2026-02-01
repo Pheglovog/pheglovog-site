@@ -1,0 +1,44 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/custom.css">
+
+<nav class="navbar">
+  <div class="navbar-content">
+    <a href="/" class="navbar-brand">Pheglovog</a>
+    <div class="navbar-links">
+      <a href="/" class="navbar-link">首页</a>
+      <a href="/projects/" class="navbar-link">项目</a>
+      <a href="/posts/" class="navbar-link">博客</a>
+      <a href="/about/" class="navbar-link">关于</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-section" style="padding-top: 80px;">
+  <div class="section-header">
+    <a href="/posts/" class="btn btn-outline" style="display: inline-flex; margin-bottom: 1rem;">← 返回博客列表</a>
+    <h2 class="section-title">{{ .Title }}</h2>
+    <p class="section-description">{{ .Date.Format "2006-01-02" }}</p>
+  </div>
+
+  <article style="max-width: 700px; margin: 0 auto; line-height: 1.8;">
+    <div style="margin-bottom: 2rem;">
+      {{ with .Params.tags }}
+      {{ range first 5 . }}
+      <span class="tag">{{ . }}</span>
+      {{ end }}
+      {{ end }}
+    </div>
+
+    <div class="content">
+      {{ .Content }}
+    </div>
+  </article>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p class="footer-text">© 2026 Pheglovog</p>
+    <a href="https://github.com/Pheglovog" class="footer-link">GitHub</a>
+  </div>
+</footer>
+{{ end }}

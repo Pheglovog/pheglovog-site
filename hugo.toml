@@ -19,3 +19,5 @@ canonifyURLs = false
   home = ["HTML"]
   section = ["HTML"]
   page = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
