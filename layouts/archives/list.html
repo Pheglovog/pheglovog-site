@@ -16,11 +16,12 @@
 <section class="page-section" style="padding-top: 80px;">
   <div class="section-header">
     <h2 class="section-title">文章归档</h2>
-    <p class="section-description">{{ len (where site.RegularPages "Type" "posts") }} 篇文章</p>
+    <p class="section-description">{{ len site.RegularPages }} 篇文章</p>
   </div>
 
   <div style="max-width: 700px; margin: 0 auto;">
-    {{ range (where site.RegularPages "Type" "posts").GroupByDate "2006-01" }}
+    {{ $posts := where site.RegularPages "Type" "posts" }}
+    {{ range $posts.GroupByDate "2006-01" }}
     <div style="margin-bottom: 2rem;">
       <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #1a1a1a;">{{ .Key }}</h3>
       <ul style="list-style: none;">
