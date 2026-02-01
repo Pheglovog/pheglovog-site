@@ -1,22 +1,8 @@
 {{ define "main" }}
-<link rel="stylesheet" href="/css/custom.css">
-
-<nav class="navbar">
-  <div class="navbar-content">
-    <a href="/" class="navbar-brand">Pheglovog</a>
-    <div class="navbar-links">
-      <a href="/" class="navbar-link">首页</a>
-      <a href="/projects/" class="navbar-link">项目</a>
-      <a href="/posts/" class="navbar-link">博客</a>
-      <a href="/about/" class="navbar-link">关于</a>
-    </div>
-  </div>
-</nav>
-
 <section class="page-section" style="padding-top: 80px;">
   <div class="section-header">
     <h2 class="section-title">文章归档</h2>
-    <p class="section-description">{{ len site.RegularPages }} 篇文章</p>
+    <p class="section-description">{{ len $posts }} 篇文章</p>
   </div>
 
   <div style="max-width: 700px; margin: 0 auto;">
@@ -38,11 +24,4 @@
     {{ end }}
   </div>
 </section>
-
-<footer class="footer">
-  <div class="footer-content">
-    <p class="footer-text">© 2026 Pheglovog</p>
-    <a href="https://github.com/Pheglovog" class="footer-link">GitHub</a>
-  </div>
-</footer>
 {{ end }}
