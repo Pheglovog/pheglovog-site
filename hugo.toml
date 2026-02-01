@@ -1,59 +1,24 @@
 baseURL = 'https://pheglovog.github.io/pheglovog-site/'
 languageCode = 'zh-CN'
 title = 'Pheglovog'
+canonifyURLs = false
 
-# 主题配置
-theme = 'hugo-geekdoc'
-
-# 禁用模块，直接使用主题
-disableKinds = ["taxonomy", "term"]
+# 禁用主题，使用自定义模板
+# theme = 'hugo-geekdoc'
 
 # 参数配置
 [params]
-  # 基本信息
   description = "量化交易 | 区块链 | 全栈开发"
   title = "Pheglovog"
   images = ["/images/avatar.png"]
 
-  # GeekDoc 主题配置
-  geekdocRepo = "https://github.com/Pheglovog/pheglovog-site"
-  geekdocEditPath = "edit/main/content"
-
-  # 自定义配置
-  customCSS = ["/css/custom.css"]
-  customJS = ["/js/custom.js"]
-
-  # 功能配置
-  comments = true
-  search = true
-  toc = true
-
-  # 社交链接
-  [[params.social]]
-    name = "GitHub"
-    url = "https://github.com/Pheglovog"
-    icon = "github"
-
-  [[params.social]]
-    name = "Email"
-    url = "mailto:3042569263@qq.com"
-    icon = "envelope"
-
-  [[params.social]]
-    name = "RSS"
-    url = "/index.xml"
-    icon = "rss"
-
-# 模块配置 - 禁用
-# [module]
-#   [[module.imports]]
-#     path = "github.com/thegeeklab/hugo-geekdoc"
+# 禁用模块
+disableKinds = ["taxonomy", "term"]
 
 # Markdown 配置
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      # 允许 HTML
       unsafe = true
 
   [markup.highlight]
@@ -63,41 +28,6 @@ disableKinds = ["taxonomy", "term"]
   [markup.tableOfContents]
     startLevel = 1
     endLevel = 9
-
-  # Front Matter 配置
-  [markup.frontmatter]
-    [markup.frontmatter.date]
-      enable = true
-
-    [markup.frontmatter.lastmod]
-      enable = true
-
-# 菜单配置
-[menu]
-  [[menu.main]]
-    name = "首页"
-    url = "/"
-    weight = 1
-
-  [[menu.main]]
-    name = "博客"
-    url = "/posts/"
-    weight = 2
-
-  [[menu.main]]
-    name = "项目"
-    url = "/projects/"
-    weight = 3
-
-  [[menu.main]]
-    name = "归档"
-    url = "/archives/"
-    weight = 4
-
-  [[menu.main]]
-    name = "关于"
-    url = "/about/"
-    weight = 5
 
 # 分类和标签
 [taxonomies]
@@ -114,6 +44,6 @@ disableKinds = ["taxonomy", "term"]
 
 # 输出配置
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
   page = ["HTML"]
