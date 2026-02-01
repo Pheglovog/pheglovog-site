@@ -1,0 +1,40 @@
+baseURL = 'https://pheglovog.github.io/pheglovog-site/'
+languageCode = 'zh-CN'
+title = '上等兵•甘'
+
+[params]
+  description = "量化交易 | 区块链 | 全栈开发"
+  title = "上等兵•甘"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 9
+
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "博客"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "项目"
+    url = "/projects/"
+    weight = 3
+  [[menu.main]]
+    name = "关于"
+    url = "/about/"
+    weight = 4
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[services]
+  [services.googleAnalytics]
+    id = ''
