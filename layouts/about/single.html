@@ -13,257 +13,287 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #fafafa;
       color: #1a1a1a;
-      line-height: 1.7;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .container {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 100px 20px;
+      padding: 0 24px;
     }
 
-    .header {
+    /* Header - 留白设计 */
+    header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e5e5;
+      padding: 32px 0;
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #f0f0f0;
-      padding: 20px 0;
-      z-index: 100;
+      z-index: 1000;
+      transition: all 0.3s ease;
     }
 
-    .nav-content {
-      max-width: 700px;
+    header:hover {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .header-content {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .logo {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 600;
       color: #1a1a1a;
       text-decoration: none;
+      letter-spacing: -0.5px;
     }
 
     .nav {
       display: flex;
-      gap: 30px;
-      justify-content: center;
-      margin-top: 16px;
+      gap: 40px;
     }
 
     .nav a {
-      color: #666;
+      color: #737373;
       text-decoration: none;
       font-size: 15px;
       font-weight: 500;
-      transition: color 0.2s;
+      letter-spacing: -0.3px;
+      transition: all 0.2s ease;
+      position: relative;
     }
 
     .nav a:hover {
       color: #1a1a1a;
     }
 
-    .avatar {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-      border-radius: 50%;
-      margin: 0 auto 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
+    /* Content - 留白 */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
     }
 
-    .avatar-text {
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .intro h1 {
-      font-size: 36px;
+    h1 {
+      font-size: 48px;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 16px;
-    }
-
-    .intro p {
-      font-size: 16px;
-      color: #666;
-      line-height: 1.6;
+      margin-bottom: 48px;
+      letter-spacing: -1px;
+      line-height: 1.2;
     }
 
     .section {
-      margin-bottom: 40px;
+      margin-bottom: 80px;
     }
 
     .section h2 {
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
     }
 
     .section p {
-      font-size: 15px;
-      color: #333;
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .tag {
-      background: #f5f5f5;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      color: #666;
-      font-weight: 500;
-      border: 1px solid #e0e0e0;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size: 17px;
+      color: #737373;
+      line-height: 1.8;
       margin-bottom: 16px;
-      font-size: 15px;
-      color: #333;
+      font-weight: 400;
     }
 
-    .contact-item a {
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .section li {
+      font-size: 17px;
+      color: #737373;
+      line-height: 1.8;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .section li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #1a1a1a;
+      font-size: 24px;
+      line-height: 17px;
+    }
+
+    /* Links */
+    .link {
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid #e5e5e5;
+      transition: all 0.2s ease;
+    }
+
+    .link:hover {
+      border-bottom-color: #1a1a1a;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      padding: 80px 24px;
+      text-align: center;
+      margin-top: 120px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    footer p {
+      color: #737373;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    footer a {
       color: #1a1a1a;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: all 0.2s ease;
     }
 
-    .contact-item a:hover {
-      color: #666;
+    footer a:hover {
       text-decoration: underline;
     }
 
-    .footer {
-      text-align: center;
-      padding: 60px 20px;
-      margin-top: 80px;
-      border-top: 1px solid #f0f0f0;
-      background: #fafafa;
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .footer p {
-      color: #999;
-      font-size: 14px;
-      margin-bottom: 8px;
+    .content > * {
+      animation: fadeInUp 0.6s ease-out;
     }
 
-    .footer a {
-      color: #666;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
+    /* Responsive */
     @media (max-width: 768px) {
-      .container {
-        padding: 80px 16px;
+      h1 {
+        font-size: 36px;
+        letter-spacing: -0.5px;
       }
 
-      .intro h1 {
-        font-size: 28px;
+      .section h2 {
+        font-size: 24px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
       }
 
       .nav {
-        gap: 16px;
+        width: 100%;
+        justify-content: space-around;
+        gap: 0;
+      }
+
+      .nav a {
+        font-size: 14px;
+      }
+
+      .content {
+        padding: 80px 24px 60px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="nav-content">
+  <header>
+    <div class="header-content">
       <a href="/" class="logo">Pheglovog</a>
-      <div class="nav">
-        <a href="/">首页</a>
+      <nav class="nav">
         <a href="/projects/">项目</a>
         <a href="/posts/">博客</a>
-      </div>
+        <a href="/about/">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content">
+    <h1>关于我</h1>
+
+    <div class="section">
+      <h2>👤 个人简介</h2>
+      <p>你好，我是 Pheglovog。一名热衷于量化交易、区块链技术和全栈开发的开发者。</p>
+      <p>我相信技术可以创造价值，用代码解决实际问题是我的信仰。通过不断学习和实践，我希望能够在这些领域有所贡献。</p>
+    </div>
+
+    <div class="section">
+      <h2>🎯 技术栈</h2>
+      <p>我的技术栈涵盖多个领域：</p>
+      <ul>
+        <li><strong>量化交易</strong>：Python、PyTorch、Pandas、Tushare、Backtrader</li>
+        <li><strong>区块链</strong>：Solidity、Ethers.js、Hardhat、Foundry、Web3.js</li>
+        <li><strong>全栈开发</strong>：Vue.js、React、Node.js、Go、TypeScript</li>
+        <li><strong>机器学习</strong>：TensorFlow、Scikit-learn、XGBoost、LightGBM</li>
+        <li><strong>后端</strong>：Django、FastAPI、Express.js、Spring Boot</li>
+        <li><strong>前端</strong>：HTML/CSS、JavaScript、Tailwind CSS、Vite</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>💻 项目经验</h2>
+      <p>我开发过多个项目，包括：</p>
+      <ul>
+        <li><a href="https://github.com/Pheglovog/AlphaGPT" target="_blank" class="link">AlphaGPT</a> - 基于符号回归的中国股市量化交易系统</li>
+        <li><a href="https://github.com/Pheglovog/carlife-eth" target="_blank" class="link">CarLife</a> - 基于 Ethereum 的汽车生活平台</li>
+        <li><a href="https://github.com/Pheglovog/CurrencyExchange" target="_blank" class="link">CurrencyExchange</a> - 去中心化的加密货币交易系统</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📚 学习与分享</h2>
+      <p>我坚持学习和分享技术知识。在 <a href="/posts/" class="link">博客</a> 中，我分享了我的学习笔记和项目经验。</p>
+      <p>我相信开源的精神，因此大部分项目都是开源的。欢迎在 GitHub 上与我交流和合作。</p>
+    </div>
+
+    <div class="section">
+      <h2>📮 联系方式</h2>
+      <p>如果你想与我交流或有任何问题，欢迎通过以下方式联系我：</p>
+      <ul>
+        <li><strong>Email</strong>：3042569263@qq.com</li>
+        <li><strong>GitHub</strong>：<a href="https://github.com/Pheglovog" target="_blank" class="link">@Pheglovog</a></li>
+      </ul>
     </div>
   </div>
 
-  <div class="container">
-    <div class="intro">
-      <div class="avatar">P</div>
-      <h1>关于</h1>
-      <p>量化交易 · 区块链 · 全栈开发</p>
-    </div>
-
-    <div class="section">
-      <h2>简介</h2>
-      <p>我是 <strong>Pheglovog</strong>，一名专注于量化交易、区块链和全栈开发的技术爱好者。从"土哥"到"上等兵•甘"，我不断学习、不断进步，努力成为更好的自己。</p>
-    </div>
-
-    <div class="section">
-      <h2>技能</h2>
-      <div class="skills-grid">
-        <span class="tag">Python</span>
-        <span class="tag">Go</span>
-        <span class="tag">TypeScript</span>
-        <span class="tag">Solidity</span>
-        <span class="tag">PyTorch</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">Vue 3</span>
-        <span class="tag">React</span>
-        <span class="tag">Ethers.js</span>
-        <span class="tag">FastAPI</span>
+  <footer>
+    <div class="container">
+      <p>© 2026 Pheglovog</p>
+      <div class="links">
+        <a href="https://github.com/Pheglovog" target="_blank">GitHub</a>
+        <a href="mailto:3042569263@qq.com">Email</a>
       </div>
     </div>
-
-    <div class="section">
-      <h2>项目</h2>
-      <p>我主要关注以下领域的项目开发：</p>
-      <p>• <strong>量化交易</strong> - AlphaGPT 中国股市量化系统</p>
-      <p>• <strong>区块链</strong> - CarLife 汽车生活平台</p>
-      <p>• <strong>全栈开发</strong> - CurrencyExchange 去中心化交易</p>
-    </div>
-
-    <div class="section">
-      <h2>联系方式</h2>
-      <div class="contact-item">
-        <span>📧</span>
-        <a href="mailto:3042569263@qq.com">3042569263@qq.com</a>
-      </div>
-      <div class="contact-item">
-        <span>🔗</span>
-        <a href="https://github.com/Pheglovog" target="_blank">github.com/Pheglovog</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <p>© 2026 Pheglovog</p>
-    <a href="https://github.com/Pheglovog" target="_blank">GitHub</a>
-  </div>
+  </footer>
 </body>
 </html>
 {{ end }}
