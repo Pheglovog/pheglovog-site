@@ -14,9 +14,10 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ .Permalink }}">
 
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/css/custom.css">
@@ -42,20 +43,29 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#2563eb">
 </head>
-<body>
-  <nav class="navbar">
+<body data-baseurl="{{ .Site.BaseURL }}">
+  <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+  <nav class="navbar" aria-label="主导航">
     <div class="navbar-content">
       <a href="/" class="navbar-brand">Pheglovog</a>
-      <div class="navbar-links">
+      <button class="navbar-toggle" type="button" aria-controls="navbar-links" aria-expanded="false">
+        <span class="navbar-toggle-icon" aria-hidden="true"></span>
+        <span class="sr-only">打开菜单</span>
+      </button>
+      <div class="navbar-links" id="navbar-links">
         <a href="/" class="navbar-link">首页</a>
         <a href="/projects/" class="navbar-link">项目</a>
         <a href="/posts/" class="navbar-link">博客</a>
         <a href="/about/" class="navbar-link">关于</a>
       </div>
+      <div class="navbar-actions" data-search-root>
+        <div class="search-results" id="search-results" aria-live="polite"></div>
+      </div>
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     {{ block "main" . }}{{ end }}
   </main>
 
@@ -76,8 +86,6 @@
   </footer>
 
   <!-- JavaScript (deferred for performance) -->
-  {{ if .HasShortcode "script" }}
   <script src="/js/custom.js" defer></script>
-  {{ end }}
 </body>
 </html>
