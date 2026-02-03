@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="量化交易 · 区块链 · 全栈开发 - Pheglovog 的个人博客，分享关于中国股市量化交易系统、以太坊 Web3 开发和全栈技术的学习心得与项目实践">
-  <meta name="keywords" content="量化交易, 区块链, 全栈开发, Python, Solidity, Vue.js, Go, 中国股市">
+  <meta name="description" content="量化交易 · 区块链 · 全栈开发 - Pheglovog 的个人主页，专注于数据驱动的量化研究与 Web3 产品开发">
+  <meta name="keywords" content="量化交易, 区块链, 全栈开发, Python, Solidity, Vue.js, Go">
   <meta name="author" content="Pheglovog">
-
   <title>Pheglovog - 量化交易 · 区块链 · 全栈开发</title>
   <link rel="canonical" href="https://pheglovog.github.io/pheglovog-site/">
 
@@ -73,6 +72,7 @@
       font-size: 15px;
       color: #666;
       transition: color 0.2s;
+      font-weight: 500;
     }
 
     .nav a:hover {
@@ -141,6 +141,35 @@
       background: #fafafa;
       border-color: #1a1a1a;
       transform: translateY(-2px);
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
     }
 
     /* Section */
@@ -221,6 +250,31 @@
       border: 1px solid #f0f0f0;
     }
 
+    /* More Link */
+    .more-link {
+      display: block;
+      text-align: center;
+      padding: 32px 0;
+      margin-top: 24px;
+    }
+
+    .btn-more {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      background: #fff;
+      color: #1a1a1a;
+      border: 1px solid #e5e5e5;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .btn-more:hover {
+      background: #fafafa;
+      border-color: #1a1a1a;
+      transform: translateY(-2px);
+    }
+
     /* Footer */
     footer {
       background: #fff;
@@ -250,6 +304,7 @@
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 36px;
+        letter-spacing: -0.5px;
       }
 
       .hero p {
@@ -265,10 +320,6 @@
         gap: 20px;
       }
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
       .hero-actions {
         flex-direction: column;
         align-items: center;
@@ -276,11 +327,19 @@
 
       .btn {
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+      }
+
+      .hero-stats {
+        gap: 32px;
       }
 
       .section-title {
         font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -288,12 +347,12 @@
 <body>
   <header>
     <div class="header-content">
-      <a href="/" class="logo">Pheglovog</a>
+      <a href="index.html" class="logo">Pheglovog</a>
       <nav class="nav">
-        <a href="/">首页</a>
-        <a href="#projects">项目</a>
-        <a href="https://github.com/Pheglovog/clawd-workspace" target="_blank" rel="noopener">博客</a>
-        <a href="https://github.com/Pheglovog" target="_blank" rel="noopener">关于</a>
+        <a href="index.html" style="color: #1a1a1a; font-weight: 600;">首页</a>
+        <a href="projects.html" style="color: #1a1a1a; font-weight: 600;">项目</a>
+        <a href="blog.html">博客</a>
+        <a href="https://github.com/Pheglovog" target="_blank">关于</a>
       </nav>
     </div>
   </header>
@@ -302,16 +361,30 @@
     <section class="hero">
       <h1>Pheglovog</h1>
       <p>量化交易 · 区块链 · 全栈开发</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">4+</div>
+          <div class="stat-label">开源项目</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">50+</div>
+          <div class="stat-label">技术文档</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10+</div>
+          <div class="stat-label">技术主题</div>
+        </div>
+      </div>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">查看项目</a>
-        <a href="https://github.com/Pheglovog/clawd-workspace" class="btn btn-outline">阅读博客</a>
+        <a href="projects.html" class="btn btn-primary">查看项目</a>
+        <a href="blog.html" class="btn btn-outline">阅读博客</a>
       </div>
     </section>
 
-    <section id="projects" class="section">
+    <section class="section">
       <h2 class="section-title">精选项目</h2>
       <div class="grid">
-        <a href="https://github.com/Pheglovog/AlphaGPT" target="_blank" rel="noopener" class="card">
+        <a href="https://github.com/Pheglovog/AlphaGPT" target="_blank" class="card">
           <span class="card-icon">📊</span>
           <h3 class="card-title">AlphaGPT</h3>
           <p class="card-desc">基于符号回归的中国股市量化交易系统，支持因子挖掘、策略回测和深度学习模型</p>
@@ -322,7 +395,7 @@
           </div>
         </a>
 
-        <a href="https://github.com/Pheglovog/carlife-eth" target="_blank" rel="noopener" class="card">
+        <a href="https://github.com/Pheglovog/carlife-eth" target="_blank" class="card">
           <span class="card-icon">🔗</span>
           <h3 class="card-title">CarLife</h3>
           <p class="card-desc">基于 Ethereum 的汽车生活平台，车辆 NFT + 服务商注册 + 评价系统</p>
@@ -333,7 +406,18 @@
           </div>
         </a>
 
-        <a href="https://github.com/Pheglovog/travel-planner-agent" target="_blank" rel="noopener" class="card">
+        <a href="https://github.com/Pheglovog/CurrencyExchange" target="_blank" class="card">
+          <span class="card-icon">💱</span>
+          <h3 class="card-title">CurrencyExchange</h3>
+          <p class="card-desc">去中心化的加密货币交易系统，支持实时汇率和多币种交易</p>
+          <div class="card-tags">
+            <span class="tag">Vue 3</span>
+            <span class="tag">Go</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/Pheglovog/travel-planner-agent" target="_blank" class="card">
           <span class="card-icon">🌸</span>
           <h3 class="card-title">Travel Planner</h3>
           <p class="card-desc">基于 LangChain 的智能旅游规划助手，支持多 Agent 协作和行程单生成</p>
@@ -344,13 +428,17 @@
           </div>
         </a>
       </div>
+
+      <div class="more-link">
+        <a href="projects.html" class="btn-more">查看所有项目 →</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>© 2026 Pheglovog</p>
-    <div class="footer">
-      <a href="https://github.com/Pheglovog" target="_blank" rel="noopener">GitHub</a>
+    <div>
+      <a href="https://github.com/Pheglovog" target="_blank">GitHub</a>
     </div>
   </footer>
 </body>
