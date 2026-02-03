@@ -24,6 +24,7 @@
     .nav { display: flex; gap: 32px; }
     .nav a { font-size: 15px; color: #666; transition: color 0.2s; }
     .nav a:hover { color: #1a1a1a; }
+    .nav a.active { color: #1a1a1a; font-weight: 600; }
 
     /* Hero */
     .hero { text-align: center; padding: 80px 24px 60px; }
@@ -51,7 +52,7 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 32px; }
+      .hero h1 { font-size: 32px; letter-spacing: -0.5px; }
       .hero p { font-size: 16px; }
       .header-content { flex-direction: column; gap: 16px; }
       .nav { gap: 20px; }
@@ -65,8 +66,8 @@
       <a href="index.html" class="logo">Pheglovog</a>
       <nav class="nav">
         <a href="index.html">首页</a>
-        <a href="#projects">项目</a>
-        <a href="blog.html" style="color: #1a1a1a; font-weight: 600;">博客</a>
+        <a href="projects.html">项目</a>
+        <a href="blog.html" class="active">博客</a>
         <a href="https://github.com/Pheglovog" target="_blank">关于</a>
       </nav>
     </div>
@@ -80,8 +81,8 @@
 
     <section class="blog-grid">
       <!-- 文章 1: FastAPI 最佳实践 -->
-      <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/fastapi-best-practices.md" target="_blank" class="blog-card">
-        <span class="icon">🚀</span>
+      <a href="articles/fastapi-best-practices.html" class="blog-card">
+        <span class="card-icon">🚀</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">FastAPI 最佳实践和异步编程指南</h2>
         <p class="excerpt">详细介绍 FastAPI 的异步编程最佳实践、项目结构规范、依赖注入和中间件、性能优化技巧、安全性实现和部署指南。</p>
@@ -93,8 +94,8 @@
       </a>
 
       <!-- 文章 2: Web3.py 开发 -->
-      <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/web3py-guide.md" target="_blank" class="blog-card">
-        <span class="icon">⛓</span>
+      <a href="articles/web3py-guide.html" class="blog-card">
+        <span class="card-icon">⛓</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">Web3.py 完整开发指南</h2>
         <p class="excerpt">涵盖 Web3.py 的账户管理、私钥安全、智能合约交互、事件监听、多网络支持和 Gas 优化。</p>
@@ -107,7 +108,7 @@
 
       <!-- 文章 3: LangChain 高级特性 -->
       <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/langchain-advanced.md" target="_blank" class="blog-card">
-        <span class="icon">🦜</span>
+        <span class="card-icon">🦜</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">LangChain 高级特性 - VectorStore 和 Callbacks</h2>
         <p class="excerpt">深入介绍 LangChain 的向量存储（VectorStore）、多种向量数据库、回调函数（Callbacks）、自定义回调处理器、RAG 检索增强生成和性能监控。</p>
@@ -120,7 +121,7 @@
 
       <!-- 文章 4: 技术新闻周报 -->
       <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/tech-news-2026-02-03.md" target="_blank" class="blog-card">
-        <span class="icon">📰</span>
+        <span class="card-icon">📰</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">技术新闻周报 - AI/LLM、云计算、Web3</h2>
         <p class="excerpt">汇总 Anthropic Claude Opus 4.5/Sonnet 4.5、AWS European Sovereign Cloud、Ethereum Hegotá 升级规划等最新技术动态。</p>
@@ -133,7 +134,7 @@
 
       <!-- 文章 5: 区块链专家研究 -->
       <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/blockchain-expert-research.md" target="_blank" class="blog-card">
-        <span class="icon">🔗</span>
+        <span class="card-icon">🔗</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">区块链领域专家研究</h2>
         <p class="excerpt">深入分析 GitHub 以太坊生态的核心基础设施、DeFi 协议、开发工具和安全最佳实践。</p>
@@ -146,7 +147,7 @@
 
       <!-- 文章 6: 区块链专家学习计划 -->
       <a href="https://github.com/Pheglovog/clawd-workspace/blob/main/docs/blockchain-expert-learning-plan.md" target="_blank" class="blog-card">
-        <span class="icon">📚</span>
+        <span class="card-icon">📚</span>
         <div class="date">2026-02-03</div>
         <h2 class="title">3 个月区块链专家学习计划</h2>
         <p class="excerpt">系统化的学习路径，涵盖 Solidity 基础、智能合约开发、Gas 优化、Layer2 和跨链技术、DeFi 协议和高级应用。</p>
