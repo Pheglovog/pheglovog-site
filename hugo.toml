@@ -3,6 +3,11 @@ languageCode = 'zh-CN'
 title = 'Pheglovog'
 canonifyURLs = true
 
+# 分类法配置 (taxonomies)
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 # SEO 参数配置
 [params]
   description = "量化交易 | 区块链 | 全栈开发 - Pheglovog 的个人博客，分享关于中国股市量化交易系统、以太坊 Web3 开发和全栈技术的学习心得与项目实践"
@@ -79,7 +84,7 @@ canonifyURLs = true
     lang = "zh-CN"
     loading = "lazy"
 
-  # 开发配置
+  # 导航菜单配置
   [menu]
     [[menu.main]]
         name = "首页"
@@ -95,6 +100,11 @@ canonifyURLs = true
         name = "项目"
         url = "/projects.html"
         weight = 30
+
+    [[menu.main]]
+        name = "搜索"
+        url = "/search/"
+        weight = 35
 
     [[menu.main]]
         name = "关于"
