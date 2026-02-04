@@ -100,3 +100,18 @@ canonifyURLs = true
         name = "关于"
         url = "/about.html"
         weight = 40
+
+  # 内容管理
+  [imaging]
+    resampleFilter = "box"
+    quality = 85
+
+  # 服务器配置
+  [server]
+    [[server.headers]]
+      for = "/"
+        [server.headers.values]
+        X-Content-Type-Options = "nosniff"
+        X-Frame-Options = "SAMEORIGIN"
+        Referrer-Policy = "no-referrer"
+        X-XSS-Protection = "1; mode=block"
