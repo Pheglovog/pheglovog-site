@@ -38,6 +38,8 @@
     .card-icon { font-size: 40px; margin-bottom: 16px; display: block; }
     .card-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.5px; }
     .card-desc { font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 16px; font-weight: 400; }
+    .card-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .feature { font-size: 12px; color: #1a1a1a; background: #f0f9ff; padding: 6px 12px; border-radius: 4px; font-weight: 500; }
     .card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .card-stats { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
     .stat-item { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 8px; }
@@ -48,16 +50,16 @@
     /* Footer */
     footer { background: #fff; padding: 40px 24px; text-align: center; margin-top: 80px; border-top: 1px solid #e5e5e5; }
     footer p { color: #666; font-size: 14px; margin-bottom: 8px; font-weight: 400; }
-    footer a { color: #1a1a1a; font-weight: 500; }
-    footer a:hover { text-decoration: underline; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 32px; }
+      .hero h1 { font-size: 32px; letter-spacing: -0.5px; }
       .hero p { font-size: 16px; }
       .header-content { flex-direction: column; gap: 16px; }
       .nav { gap: 20px; }
       .grid { grid-template-columns: 1fr; }
+      .card-features { flex-direction: column; }
+      .feature { width: 100%; }
     }
   </style>
 </head>
@@ -81,10 +83,17 @@
     </section>
 
     <section class="grid">
+      <!-- AlphaGPT -->
       <a href="https://github.com/Pheglovog/AlphaGPT" target="_blank" class="card">
         <span class="card-icon">📊</span>
         <h2 class="card-title">AlphaGPT</h2>
         <p class="card-desc">基于符号回归的中国股市量化交易系统，支持因子挖掘、策略回测和深度学习模型。集成 Tushare Pro API，提供真实数据支持。</p>
+        <div class="card-features">
+          <span class="feature">✅ 因子挖掘引擎</span>
+          <span class="feature">✅ 策略回测框架</span>
+          <span class="feature">✅ 真实数据训练</span>
+          <span class="feature">✅ 风险管理系统</span>
+        </div>
         <div class="card-tags">
           <span class="tag">Python</span>
           <span class="tag">PyTorch</span>
@@ -95,13 +104,21 @@
           <div class="stat-item"><span class="stat-label">GitHub</span> <span class="stat-value">Pheglovog/AlphaGPT</span></div>
           <div class="stat-item"><span class="stat-label">语言</span> <span class="stat-value">Python</span></div>
           <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">🔄 开发中</span></div>
         </div>
       </a>
 
+      <!-- CarLife -->
       <a href="https://github.com/Pheglovog/carlife-eth" target="_blank" class="card">
         <span class="card-icon">🔗</span>
         <h2 class="card-title">CarLife</h2>
         <p class="card-desc">基于 Ethereum 的汽车生活平台，结合车辆 NFT、服务商注册系统和评价功能。支持车辆历史记录、维修追踪和里程证明。</p>
+        <div class="card-features">
+          <span class="feature">✅ 车辆 NFT 系统</span>
+          <span class="feature">✅ 服务商注册</span>
+          <span class="feature">✅ 评价系统</span>
+          <span class="feature">✅ 里程证明</span>
+        </div>
         <div class="card-tags">
           <span class="tag">Solidity</span>
           <span class="tag">ERC721</span>
@@ -110,15 +127,23 @@
         </div>
         <div class="card-stats">
           <div class="stat-item"><span class="stat-label">GitHub</span> <span class="stat-value">Pheglovog/carlife-eth</span></div>
-          <div class="stat-item"><span class="stat-label">网络</span> <span class="stat-value">以太坊主网</span></div>
-          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">网络</span> <span class="stat-value">Sepolia 测试网</span></div>
+          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">🔄 测试中</span></div>
         </div>
       </a>
 
+      <!-- CurrencyExchange -->
       <a href="https://github.com/Pheglovog/CurrencyExchange" target="_blank" class="card">
         <span class="card-icon">💱</span>
         <h2 class="card-title">CurrencyExchange</h2>
         <p class="card-desc">去中心化的加密货币交易系统，支持实时汇率和多币种交易。集成多个交易提供商，提供最佳价格和最低手续费。</p>
+        <div class="card-features">
+          <span class="feature">✅ 实时汇率</span>
+          <span class="feature">✅ 多币种支持</span>
+          <span class="feature">✅ 聚合交易</span>
+          <span class="feature">✅ 低手续费</span>
+        </div>
         <div class="card-tags">
           <span class="tag">Vue 3</span>
           <span class="tag">Go</span>
@@ -128,14 +153,22 @@
         <div class="card-stats">
           <div class="stat-item"><span class="stat-label">GitHub</span> <span class="stat-value">Pheglovog/CurrencyExchange</span></div>
           <div class="stat-item"><span class="stat-label">类型</span> <span class="stat-value">DeFi 协议</span></div>
-          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">⏳ 规划中</span></div>
         </div>
       </a>
 
+      <!-- Travel Planner -->
       <a href="https://github.com/Pheglovog/travel-planner-agent" target="_blank" class="card">
         <span class="card-icon">🌸</span>
         <h2 class="card-title">Travel Planner</h2>
         <p class="card-desc">基于 LangChain 的智能旅游规划助手，支持多 Agent 协作、实时天气、地图集成和行程单生成。提供个性化旅游建议和优化路线。</p>
+        <div class="card-features">
+          <span class="feature">✅ 多 Agent 协作</span>
+          <span class="feature">✅ 实时天气</span>
+          <span class="feature">✅ 汇率转换</span>
+          <span class="feature">✅ 行程优化</span>
+        </div>
         <div class="card-tags">
           <span class="tag">Python</span>
           <span class="tag">LangChain</span>
@@ -145,23 +178,58 @@
         <div class="card-stats">
           <div class="stat-item"><span class="stat-label">GitHub</span> <span class="stat-value">Pheglovog/travel-planner-agent</span></div>
           <div class="stat-item"><span class="stat-label">Agent</span> <span class="stat-value">Multi-Agent</span></div>
-          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">✅ 已完成</span></div>
         </div>
       </a>
 
+      <!-- Clawd Workspace -->
       <a href="https://github.com/Pheglovog/clawd-workspace" target="_blank" class="card">
         <span class="card-icon">📚</span>
         <h2 class="card-title">Clawd Workspace</h2>
         <p class="card-desc">我的工作空间，包含所有技术文档、学习笔记、项目规划和代码示例。涵盖区块链、AI、全栈开发等多个领域。</p>
+        <div class="card-features">
+          <span class="feature">✅ 技术文档</span>
+          <span class="feature">✅ 学习笔记</span>
+          <span class="feature">✅ 项目规划</span>
+          <span class="feature">✅ 代码示例</span>
+        </div>
         <div class="card-tags">
           <span class="tag">文档</span>
           <span class="tag">学习</span>
           <span class="tag">开源</span>
+          <span class="tag">技术</span>
         </div>
         <div class="card-stats">
           <div class="stat-item"><span class="stat-label">文档数</span> <span class="stat-value">50+</span></div>
           <div class="stat-item"><span class="stat-label">主题</span> <span class="stat-value">10+</span></div>
           <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">🔄 持续更新</span></div>
+        </div>
+      </a>
+
+      <!-- Pheglovog Site -->
+      <a href="https://github.com/Pheglovog/pheglovog-site" target="_blank" class="card">
+        <span class="card-icon">🌐</span>
+        <h2 class="card-title">Pheglovog Site</h2>
+        <p class="card-desc">我的个人主页，包含项目展示、博客文章和关于页面。采用简洁的设计风格，注重内容展示和用户体验。</p>
+        <div class="card-features">
+          <span class="feature">✅ 响应式设计</span>
+          <span class="feature">✅ 快速加载</span>
+          <span class="feature">✅ 中文支持</span>
+          <span class="feature">✅ GitHub Pages</span>
+        </div>
+        <div class="card-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">GitHub Pages</span>
+          <span class="tag">静态网站</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat-item"><span class="stat-label">GitHub</span> <span class="stat-value">Pheglovog/pheglovog-site</span></div>
+          <div class="stat-item"><span class="stat-label">页面</span> <span class="stat-value">4+</span></div>
+          <div class="stat-item"><span class="stat-label">星标</span> <span class="stat-value">⭐⭐⭐</span></div>
+          <div class="stat-item"><span class="stat-label">状态</span> <span class="stat-value">✅ 已部署</span></div>
         </div>
       </a>
     </section>
@@ -169,9 +237,7 @@
 
   <footer>
     <p>© 2026 Pheglovog</p>
-    <div class="footer">
-      <a href="https://github.com/Pheglovog" target="_blank">GitHub</a>
-    </div>
+    <a href="https://github.com/Pheglovog" target="_blank">GitHub</a>
   </footer>
 </body>
 </html>
