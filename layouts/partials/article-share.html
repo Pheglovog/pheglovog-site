@@ -1,0 +1,182 @@
+<!-- 文章分享按钮 -->
+<div class="article-share">
+  <span class="share-label">分享:</span>
+  <div class="share-buttons">
+    <!-- 复制链接 -->
+    <button class="share-btn" id="copy-link" title="复制链接">
+      <span class="share-icon">🔗</span>
+    </button>
+
+    <!-- Twitter -->
+    <a href="https://twitter.com/intent/tweet?text={{ .Title }}&url={{ .Permalink }}" target="_blank" class="share-btn" title="分享到 Twitter">
+      <span class="share-icon">𝕏</span>
+    </a>
+
+    <!-- 微博 -->
+    <a href="https://service.weibo.com/share/share.php?url={{ .Permalink }}&title={{ .Title }}" target="_blank" class="share-btn" title="分享到微博">
+      <span class="share-icon">📱</span>
+    </a>
+
+    <!-- GitHub -->
+    <a href="{{ .Permalink }}" target="_blank" class="share-btn" title="在 GitHub 上查看">
+      <span class="share-icon">🐙</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .article-share {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #fafafa;
+    border-radius: 8px;
+  }
+
+  .share-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .share-btn:hover {
+    border-color: #1a1a1a;
+    background: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .share-icon {
+    font-size: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .article-share {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .share-btn {
+      width: 32px;
+      height: 32px;
+    }
+
+    .share-icon {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  // 复制链接功能
+  (function() {
+    const copyBtn = document.getElementById('copy-link');
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        const url = window.location.href;
+
+        // 复制到剪贴板
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function() {
+            showToast('链接已复制到剪贴板', 'success');
+          }).catch(function() {
+            fallbackCopy(url);
+          });
+        } else {
+          fallbackCopy(url);
+        }
+      });
+    }
+
+    // 回退复制方法
+    function fallbackCopy(url) {
+      const textArea = document.createElement('textarea');
+      textArea.value = url;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand('copy');
+        showToast('链接已复制', 'success');
+      } catch (err) {
+        showToast('复制失败，请手动复制', 'error');
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    // 显示提示
+    function showToast(message, type) {
+      const toast = document.createElement('div');
+      toast.className = 'share-toast';
+      toast.textContent = message;
+
+      if (type === 'success') {
+        toast.style.backgroundColor = '#16a34a';
+      } else if (type === 'error') {
+        toast.style.backgroundColor = '#dc2626';
+      }
+
+      document.body.appendChild(toast);
+
+      setTimeout(function() {
+        toast.classList.add('show');
+      }, 10);
+
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+
+      setTimeout(function() {
+        document.body.removeChild(toast);
+      }, 3500);
+    }
+  })();
+</script>
+
+<style>
+  .share-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 0.75rem 1.5rem;
+    background: #333;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 9999;
+  }
+
+  .share-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+</style>

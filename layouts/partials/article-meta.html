@@ -1,0 +1,99 @@
+<!-- 文章元数据 -->
+<div class="article-meta">
+  <div class="meta-date">
+    <span class="meta-icon">📅</span>
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+      {{ .Date.Format .Site.Params.blog.dateFormat }}
+    </time>
+  </div>
+
+  {{- if .Site.Params.blog.showReadTime }}
+  <div class="meta-read-time">
+    <span class="meta-icon">⏱</span>
+    <span class="read-time">阅读时间约 {{ .ReadingTime }} 分钟</span>
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.blog.showCategories and .Params.categories }}
+  <div class="meta-categories">
+    <span class="meta-icon">📁</span>
+    {{- range $index, $category := .Params.categories }}
+      {{- if $index }}, {{ end }}
+      <a href="{{ "categories" | relURL }}/{{ $category | urlize }}/" class="category-link">{{ $category }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.blog.showTags and .Params.tags }}
+  <div class="meta-tags">
+    <span class="meta-icon">🏷</span>
+    {{- range $index, $tag := .Params.tags }}
+      {{- if $index }}, {{ end }}
+      <a href="{{ "tags" | relURL }}/{{ $tag | urlize }}/" class="tag-link">{{ $tag }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- if .Params.updated }}
+  <div class="meta-updated">
+    <span class="meta-icon">✏️</span>
+    <time datetime="{{ .Params.updated.Format "2006-01-02T15:04:05Z07:00" }}">
+      更新于 {{ .Params.updated.Format "2006-01-02" }}
+    </time>
+  </div>
+  {{- end }}
+</div>
+
+<style>
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 2rem;
+    font-size: 14px;
+  }
+
+  .article-meta > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+  }
+
+  .meta-icon {
+    font-size: 16px;
+  }
+
+  .category-link,
+  .tag-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    padding: 0.25rem 0.75rem;
+    background: #fafafa;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid #f0f0f0;
+  }
+
+  .category-link:hover,
+  .tag-link:hover {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+  }
+
+  @media (max-width: 768px) {
+    .article-meta {
+      gap: 0.75rem;
+      font-size: 13px;
+    }
+
+    .article-meta > div {
+      flex-wrap: wrap;
+    }
+  }
+</style>
