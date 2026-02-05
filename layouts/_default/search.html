@@ -1,180 +1,35 @@
+{{ define "head-extra" }}
+  <link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+{{ end }}
+
 {{ define "main" }}
-<!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>搜索 - {{ .Site.Title }}</title>
-  <meta name="description" content="搜索 Pheglovog 的博客文章">
-  
-  <!-- Pagefind CSS -->
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", sans-serif; 
-      background: #fafafa; 
-      color: #1a1a1a; 
-      line-height: 1.7; 
-    }
-    a { text-decoration: none; color: inherit; transition: color 0.2s; }
-    a:hover { color: #1a1a1a; }
-    
-    /* Header */
-    .site-header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
-    .header-content { max-width: 1000px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; }
-    .nav { display: flex; gap: 2rem; }
-    .nav a { font-size: 0.9375rem; color: #666; font-weight: 500; }
-    .nav a.active { color: #1a1a1a; font-weight: 600; }
-    
-    /* Search Container */
-    .search-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 3rem 24px;
-    }
-    
-    .search-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    
-    .search-header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .search-header p {
-      color: #666;
-      font-size: 1rem;
-    }
-    
-    /* Pagefind 样式覆盖 */
-    :root {
-      --pagefind-ui-scale: 1;
-      --pagefind-ui-primary: #1a1a1a;
-      --pagefind-ui-text: #1a1a1a;
-      --pagefind-ui-background: #fff;
-      --pagefind-ui-border: #e5e5e5;
-      --pagefind-ui-tag: #f0f0f0;
-      --pagefind-ui-border-width: 1px;
-      --pagefind-ui-border-radius: 8px;
-      --pagefind-ui-image-border-radius: 8px;
-      --pagefind-ui-image-box-ratio: 3 / 2;
-      --pagefind-ui-font: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
-    }
-    
-    .pagefind-ui__search-input {
-      font-size: 1rem !important;
-      padding: 0.875rem 1rem !important;
-      border-radius: 8px !important;
-    }
-    
-    .pagefind-ui__search-clear {
-      padding: 0.875rem !important;
-    }
-    
-    .pagefind-ui__result {
-      padding: 1.5rem !important;
-      border-radius: 8px !important;
-      margin-bottom: 1rem !important;
-      background: #fff !important;
-      border: 1px solid #e5e5e5 !important;
-      transition: all 0.2s !important;
-    }
-    
-    .pagefind-ui__result:hover {
-      border-color: #1a1a1a !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    }
-    
-    .pagefind-ui__result-link {
-      font-size: 1.125rem !important;
-      font-weight: 600 !important;
-      color: #1a1a1a !important;
-    }
-    
-    .pagefind-ui__result-excerpt {
-      margin-top: 0.5rem !important;
-      color: #666 !important;
-      line-height: 1.6 !important;
-    }
-    
-    mark {
-      background: #fef3c7 !important;
-      color: #1a1a1a !important;
-      padding: 0.125rem 0.25rem !important;
-      border-radius: 2px !important;
-    }
-    
-    /* Footer */
-    .site-footer { background: #fff; padding: 2.5rem 1.5rem; text-align: center; margin-top: 4rem; border-top: 1px solid #e5e5e5; }
-    .site-footer p { color: #666; font-size: 0.875rem; margin-bottom: 0.5rem; }
-    .site-footer a { color: #1a1a1a; font-weight: 500; }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header-content { flex-direction: column; gap: 1rem; }
-      .nav { gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
-      .search-header h1 { font-size: 1.5rem; }
-    }
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-content">
-      <a href="{{ .Site.BaseURL }}" class="logo">{{ .Site.Title }}</a>
-      <nav class="nav">
-        <a href="{{ .Site.BaseURL }}">首页</a>
-        <a href="{{ "posts" | relURL }}">博客</a>
-        <a href="{{ "projects" | relURL }}">项目</a>
-        <a href="{{ "search" | relURL }}" class="active">搜索</a>
-        <a href="{{ "about" | relURL }}">关于</a>
-      </nav>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">{{ .Site.Title }}</p>
+      <h1 class="page-title">搜索</h1>
+      <p class="page-subtitle">输入关键词搜索博客内容</p>
     </div>
-  </header>
+  </section>
 
-  <!-- Search Container -->
-  <div class="search-container">
-    <div class="search-header">
-      <h1>🔍 搜索文章</h1>
-      <p>输入关键词搜索博客内容</p>
+  <section class="section search-shell">
+    <div class="container">
+      <div id="search"></div>
     </div>
-    
-    <div id="search"></div>
-  </div>
+  </section>
+{{ end }}
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>© {{ now.Year }} {{ .Site.Title }}</p>
-    <a href="{{ .Site.Params.social.github }}" target="_blank">GitHub</a>
-  </footer>
-
-  <!-- Pagefind JS -->
-  <script src="/pagefind/pagefind-ui.js"></script>
+{{ define "scripts" }}
+  <script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-      new PagefindUI({ 
-        element: "#search",
-        showSubResults: true,
-        showImages: false,
-        translations: {
-          placeholder: "搜索文章...",
-          zero_results: "没有找到 \"[SEARCH_TERM]\" 相关的结果",
-          many_results: "找到 [COUNT] 条结果",
-          one_result: "找到 1 条结果",
-          alt_search: "没有找到 \"[SEARCH_TERM]\" 的结果，显示 \"[DIFFERENT_TERM]\" 的结果",
-          search_suggestion: "没有找到 \"[SEARCH_TERM]\" 的结果，试试以下搜索：",
-          searching: "搜索 \"[SEARCH_TERM]\"..."
-        }
-      });
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.PagefindUI) {
+        new PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          translations: { placeholder: "搜索文章" }
+        });
+      }
     });
   </script>
-</body>
-</html>
 {{ end }}

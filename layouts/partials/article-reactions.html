@@ -1,123 +1,49 @@
 {{- if .Site.Params.giscus.reactionsEnabled -}}
-<!-- 点赞和反应按钮 -->
-<div class="article-reactions" id="article-reactions">
+<div class="reactions" id="article-reactions">
   <div class="reaction-buttons">
-    <button class="reaction-btn" data-reaction="thumbs_up" title="👍 点赞">
-      <span class="reaction-icon">👍</span>
-      <span class="reaction-count" id="count-thumbs_up">0</span>
+    <button class="reaction-btn" data-reaction="thumbs_up" type="button">
+      {{ partial "icon.html" (dict "name" "thumb" "class" "icon") }}
+      <span id="count-thumbs_up">0</span>
     </button>
-    <button class="reaction-btn" data-reaction="heart" title="❤️ 喜欢">
-      <span class="reaction-icon">❤️</span>
-      <span class="reaction-count" id="count-heart">0</span>
+    <button class="reaction-btn" data-reaction="heart" type="button">
+      {{ partial "icon.html" (dict "name" "heart" "class" "icon") }}
+      <span id="count-heart">0</span>
     </button>
-    <button class="reaction-btn" data-reaction="rocket" title="🚀 优秀">
-      <span class="reaction-icon">🚀</span>
-      <span class="reaction-count" id="count-rocket">0</span>
+    <button class="reaction-btn" data-reaction="rocket" type="button">
+      {{ partial "icon.html" (dict "name" "rocket" "class" "icon") }}
+      <span id="count-rocket">0</span>
     </button>
-    <button class="reaction-btn" data-reaction="eyes" title="👀 关注">
-      <span class="reaction-icon">👀</span>
-      <span class="reaction-count" id="count-eyes">0</span>
+    <button class="reaction-btn" data-reaction="eyes" type="button">
+      {{ partial "icon.html" (dict "name" "eye" "class" "icon") }}
+      <span id="count-eyes">0</span>
     </button>
   </div>
   <div class="reaction-message" id="reaction-message"></div>
 </div>
 
-<style>
-  .article-reactions {
-    margin: 2rem 0;
-    padding: 1rem;
-    background: #fafafa;
-    border-radius: 12px;
-    border: 1px solid #e5e5e5;
-  }
-
-  .reaction-buttons {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .reaction-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
-    transition: all 0.2s;
-  }
-
-  .reaction-btn:hover {
-    border-color: #1a1a1a;
-    background: #f5f5f5;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .reaction-btn:active {
-    transform: translateY(0);
-  }
-
-  .reaction-icon {
-    font-size: 18px;
-  }
-
-  .reaction-count {
-    font-size: 14px;
-    color: #666;
-    font-weight: 600;
-  }
-
-  .reaction-message {
-    margin-top: 0.75rem;
-    font-size: 13px;
-    color: #666;
-    text-align: center;
-    min-height: 20px;
-  }
-
-  @media (max-width: 768px) {
-    .reaction-buttons {
-      gap: 0.25rem;
-    }
-
-    .reaction-btn {
-      padding: 0.4rem 0.6rem;
-      font-size: 13px;
-    }
-
-    .reaction-icon {
-      font-size: 16px;
-    }
-  }
-</style>
-
 <script>
-  // 点赞反应脚本
   (function() {
     const buttons = document.querySelectorAll('.reaction-btn');
     const messageEl = document.getElementById('reaction-message');
 
-    // 从 localStorage 读取反应数据
+    const labels = {
+      thumbs_up: '点赞',
+      heart: '喜欢',
+      rocket: '很棒',
+      eyes: '关注'
+    };
+
     const getReactions = () => {
       const path = window.location.pathname;
       const data = localStorage.getItem(`reactions_${path}`);
       return data ? JSON.parse(data) : {};
     };
 
-    // 保存反应数据到 localStorage
     const saveReactions = (reactions) => {
       const path = window.location.pathname;
       localStorage.setItem(`reactions_${path}`, JSON.stringify(reactions));
     };
 
-    // 更新显示
     const updateDisplay = () => {
       const reactions = getReactions();
       for (const [reaction, count] of Object.entries(reactions)) {
@@ -128,7 +54,6 @@
       }
     };
 
-    // 添加反应
     const addReaction = (reaction) => {
       const reactions = getReactions();
       if (!reactions[reaction]) {
@@ -137,33 +62,21 @@
       reactions[reaction]++;
       saveReactions(reactions);
       updateDisplay();
-      showMessage(`你反应了 ${reaction === 'thumbs_up' ? '👍' : reaction === 'heart' ? '❤️' : reaction === 'rocket' ? '🚀' : '👀'}`, 'success');
+      showMessage(`已记录：${labels[reaction] || reaction}`);
     };
 
-    // 显示消息
-    const showMessage = (text, type = 'info') => {
+    const showMessage = (text) => {
       if (messageEl) {
         messageEl.textContent = text;
-        messageEl.style.color = type === 'success' ? '#16a34a' : '#666';
       }
     };
 
-    // 初始化
     updateDisplay();
 
-    // 绑定点击事件
     buttons.forEach(btn => {
       btn.addEventListener('click', function() {
         const reaction = this.getAttribute('data-reaction');
         addReaction(reaction);
-
-        // 滚动到评论区
-        const giscusContainer = document.getElementById('giscus-container');
-        if (giscusContainer) {
-          setTimeout(() => {
-            giscusContainer.scrollIntoView({ behavior: 'smooth' });
-          }, 500);
-        }
       });
     });
   })();

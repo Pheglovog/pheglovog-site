@@ -67,6 +67,7 @@ canonifyURLs = true
     showReadTime = true
     showTags = true
     showCategories = true
+    showTOC = true
     showRelatedPosts = true
     relatedPostsCount = 3
 
@@ -98,7 +99,7 @@ canonifyURLs = true
 
     [[menu.main]]
         name = "项目"
-        url = "/projects.html"
+        url = "/projects/"
         weight = 30
 
     [[menu.main]]
@@ -108,7 +109,7 @@ canonifyURLs = true
 
     [[menu.main]]
         name = "关于"
-        url = "/about.html"
+        url = "/about/"
         weight = 40
 
   # 内容管理

@@ -37,29 +37,19 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: 准备部署目录
+      - name: 安装 Hugo CLI
+        env:
+          HUGO_VERSION: 0.136.5
         run: |
-          mkdir -p _site
-          # 复制所有静态文件到部署目录
-          cp -r *.html _site/ 2>/dev/null || true
-          cp -r *.xml _site/ 2>/dev/null || true
-          cp -r *.md _site/ 2>/dev/null || true
-          cp -r posts _site/ 2>/dev/null || true
-          cp -r articles _site/ 2>/dev/null || true
-          cp -r projects _site/ 2>/dev/null || true
-          cp -r about _site/ 2>/dev/null || true
-          cp -r archives _site/ 2>/dev/null || true
-          cp -r categories _site/ 2>/dev/null || true
-          cp -r tags _site/ 2>/dev/null || true
-          cp -r search _site/ 2>/dev/null || true
-          cp -r css _site/ 2>/dev/null || true
-          cp -r js _site/ 2>/dev/null || true
-          cp -r memory _site/ 2>/dev/null || true
-          # 复制 static 目录内容
-          cp -r static/* _site/ 2>/dev/null || true
-          # 列出文件确认
-          echo "=== 部署目录内容 ==="
-          find _site -name "*.html" | head -20
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: 使用 Hugo 构建
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}" --destination _site
 
       - name: 安装并运行 Pagefind
         run: npx pagefind@latest --site _site --glob "**/*.html"

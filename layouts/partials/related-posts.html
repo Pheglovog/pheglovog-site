@@ -1,125 +1,17 @@
 {{- if .Site.Params.blog.showRelatedPosts -}}
-<!-- 相关文章 -->
 <div class="related-posts">
-  <h3 class="related-title">相关文章</h3>
+  <h3>相关文章</h3>
   <div class="related-grid">
     {{- $currentPage := . }}
-    {{- range first .Site.Params.blog.relatedPostsCount (where .Site.RegularPages "Kind" "page") }}
-    {{- if ne . $currentPage }}
-    <a href="{{ .Permalink }}" class="related-card">
-      <div class="related-date">
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-          {{ .Date.Format "2006-01-02" }}
-        </time>
-      </div>
-      <h4 class="related-title-text">{{ .Title }}</h4>
-      <p class="related-excerpt">{{ .Summary | truncate 100 }}</p>
-      {{- if .Params.tags }}
-      <div class="related-tags">
-        {{- range first 3 .Params.tags }}
-        <span class="tag">{{ . }}</span>
-        {{- end }}
-      </div>
+    {{- range first .Site.Params.blog.relatedPostsCount (where .Site.RegularPages "Section" "posts") }}
+      {{- if ne . $currentPage }}
+        <a href="{{ .RelPermalink }}" class="related-card">
+          <div class="related-date">{{ .Date.Format .Site.Params.blog.dateFormat }}</div>
+          <div class="related-title">{{ .Title }}</div>
+          <div class="related-excerpt">{{ .Summary | plainify | truncate 100 }}</div>
+        </a>
       {{- end }}
-    </a>
-    {{- end }}
     {{- end }}
   </div>
 </div>
-
-<style>
-  .related-posts {
-    margin: 2.5rem 0;
-    padding: 1.5rem;
-    background: #fafafa;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e5e5;
-  }
-
-  .related-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #1a1a1a;
-  }
-
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .related-card {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    transition: all 0.3s;
-    text-decoration: none;
-    color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .related-card:hover {
-    border-color: #1a1a1a;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-4px);
-  }
-
-  .related-date {
-    font-size: 0.8125rem;
-    color: #999;
-    margin-bottom: 0.5rem;
-  }
-
-  .related-title-text {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-    color: #1a1a1a;
-  }
-
-  .related-excerpt {
-    font-size: 0.8125rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .related-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: auto;
-  }
-
-  .related-tags .tag {
-    font-size: 0.75rem;
-    color: #666;
-    background: #fafafa;
-    padding: 0.25rem 0.625rem;
-    border-radius: 0.25rem;
-    border: 1px solid #f0f0f0;
-  }
-
-  @media (max-width: 768px) {
-    .related-posts {
-      padding: 1rem;
-    }
-
-    .related-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .related-title {
-      font-size: 1rem;
-    }
-  }
-</style>
 {{- end }}

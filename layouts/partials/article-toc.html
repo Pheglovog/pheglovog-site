@@ -1,162 +1,27 @@
 {{- if and .TableOfContents .Site.Params.blog.showTOC -}}
-<!-- 文章目录 -->
-<div class="article-toc">
-  <div class="toc-toggle" id="toc-toggle">
-    <button class="toc-toggle-btn">
-      <span>📋</span>
-      <span>目录</span>
-    </button>
-  </div>
-
-  <div class="toc-content" id="toc-content">
-    <h3 class="toc-title">目录</h3>
-    <nav class="toc-nav">
-      <ul>
-        {{- range .TableOfContents }}
-        <li>
-          <a href="{{ .Anchor }}" class="toc-link">{{ .Title }}</a>
-          {{- if .SubSections }}
-          <ul>
-            {{- range .SubSections }}
-            <li>
-              <a href="{{ .Anchor }}" class="toc-link toc-sublink">{{ .Title }}</a>
-            </li>
-            {{- end }}
-          </ul>
-          {{- end }}
-        </li>
-        {{- end }}
-      </ul>
-    </nav>
+<div class="toc" id="toc">
+  <button class="toc-toggle" type="button" aria-expanded="false">
+    {{ partial "icon.html" (dict "name" "list" "class" "icon") }}
+    目录
+  </button>
+  <div class="toc-nav">
+    <div class="toc-title">目录</div>
+    <div class="toc-list">
+      {{ .TableOfContents }}
+    </div>
   </div>
 </div>
 
-<style>
-  .article-toc {
-    position: sticky;
-    top: 100px;
-    width: 280px;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: #fafafa;
-    border-radius: 12px;
-    border: 1px solid #e5e5e5;
-  }
-
-  .toc-toggle-btn {
-    display: none;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .toc-toggle-btn:hover {
-    background: #f5f5f5;
-    border-color: #1a1a1a;
-  }
-
-  .toc-content {
-    display: block;
-  }
-
-  .toc-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #1a1a1a;
-  }
-
-  .toc-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .toc-nav ul ul {
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .toc-nav li {
-    margin-bottom: 0.5rem;
-  }
-
-  .toc-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.2s;
-    display: block;
-    padding: 0.25rem 0;
-  }
-
-  .toc-link:hover {
-    color: #1a1a1a;
-  }
-
-  .toc-sublink {
-    font-size: 13px;
-    color: #999;
-  }
-
-  @media (max-width: 1024px) {
-    .article-toc {
-      position: relative;
-      width: 100%;
-      top: 0;
-      max-height: none;
-    }
-
-    .toc-toggle-btn {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .toc-content {
-      display: none;
-      margin-top: 1rem;
-    }
-
-    .toc-content.active {
-      display: block;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .article-toc {
-      padding: 1rem;
-    }
-
-    .toc-link {
-      font-size: 13px;
-    }
-
-    .toc-sublink {
-      font-size: 12px;
-    }
-  }
-</style>
-
 <script>
-  // 目录折叠/展开
   (function() {
-    const toggleBtn = document.getElementById('toc-toggle');
-    const tocContent = document.getElementById('toc-content');
+    const toc = document.getElementById('toc');
+    const toggle = toc ? toc.querySelector('.toc-toggle') : null;
+    if (!toc || !toggle) return;
 
-    if (toggleBtn && tocContent) {
-      toggleBtn.addEventListener('click', function() {
-        tocContent.classList.toggle('active');
-      });
-    }
+    toggle.addEventListener('click', () => {
+      const open = toc.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   })();
 </script>
 {{- end }}
