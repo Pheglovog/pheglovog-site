@@ -1,0 +1,37 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="container container--reading">
+      <p class="eyebrow">文章</p>
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{- with .Params.description }}
+        <p class="page-subtitle">{{ . }}</p>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--reading">
+      {{- if .Content }}
+        <div class="prose">
+          {{ .Content }}
+        </div>
+      {{- end }}
+
+      <div class="archive">
+        {{- range (where site.RegularPages "Section" "posts").GroupByDate "2006-01" }}
+          <div class="archive-group">
+            <div class="archive-month">{{ .Key }}</div>
+            <div class="archive-list">
+              {{- range .Pages }}
+                <a class="archive-item" href="{{ .RelPermalink }}">
+                  <span class="archive-title">{{ .Title }}</span>
+                  <span class="archive-date">{{ .Date.Format "01-02" }}</span>
+                </a>
+              {{- end }}
+            </div>
+          </div>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
