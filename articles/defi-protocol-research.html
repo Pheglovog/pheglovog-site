@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DeFi 协议深度研究 - 深入了解去中心化金融的核心协议、机制原理和风险管理">
+  <meta name="keywords" content="DeFi, 去中心化金融, 借贷协议, DEX, Uniswap, Aave, Compound, 闪电贷">
+  <meta name="author" content="Pheglovog">
+  <title>DeFi 协议深度研究 - Pheglovog</title>
+  <link rel="canonical" href="https://pheglovog.github.io/pheglovog-site/articles/defi-protocol-research.html">
+
+  <style>
+    /* 全局样式 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+    .nav { display: flex; gap: 32px; }
+    .nav a {
+      font-size: 15px;
+      color: #666;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav a:hover { color: #1a1a1a; }
+    .nav a.active { color: #1a1a1a; font-weight: 600; }
+
+    /* Article */
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      background: #fff;
+    }
+    .article-header {
+      margin-bottom: 40px;
+    }
+    .article-meta {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .article-title {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background: #f0f0f0;
+      color: #666;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .content { margin-bottom: 60px; }
+    .content h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 48px 0 24px;
+      letter-spacing: -0.5px;
+    }
+    .content h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 32px 0 16px;
+    }
+    .content p {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .content ul, .content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .content li {
+      margin-bottom: 12px;
+    }
+    .content code {
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: "Fira Code", "SF Mono", "Monaco", "Courier New", monospace;
+      font-size: 14px;
+      color: #d63384;
+    }
+    .content pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .content pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    /* Table */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+    .content th,
+    .content td {
+      border: 1px solid #e5e5e5;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .content th {
+      background: #fafafa;
+      font-weight: 600;
+    }
+
+    /* Blockquote */
+    .content blockquote {
+      border-left: 4px solid #007bff;
+      padding-left: 20px;
+      margin: 24px 0;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Footer */
+    .article-footer {
+      padding-top: 40px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .article-footer p {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .back-link {
+      display: inline-block;
+      color: #007bff;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .article-title { font-size: 32px; }
+      .content h2 { font-size: 24px; }
+      .content h3 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="/pheglovog-site/" class="logo">Pheglovog</a>
+      <nav class="nav">
+        <a href="/pheglovog-site/index.html">首页</a>
+        <a href="/pheglovog-site/projects.html">项目</a>
+        <a href="/pheglovog-site/blog.html" class="active">博客</a>
+        <a href="/pheglovog-site/about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article -->
+  <article>
+    <div class="article-header">
+      <div class="article-meta">2026-02-08 • 约 15 分钟阅读</div>
+      <h1 class="article-title">DeFi 协议深度研究</h1>
+      <div class="article-tags">
+        <span class="tag">DeFi</span>
+        <span class="tag">去中心化金融</span>
+        <span class="tag">借贷协议</span>
+        <span class="tag">DEX</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>DeFi（Decentralized Finance，去中心化金融）是区块链领域最重要的创新之一。通过智能合约，DeFi 实现了无需信任第三方的金融服务。本文深入研究 DeFi 的核心协议、机制原理和风险管理。</p>
+
+      <h2>一、DeFi 基础概念</h2>
+
+      <p>DeFi 是利用区块链技术构建的去中心化金融应用。与传统金融（CeFi）不同，DeFi 不依赖中心化机构，而是通过智能合约自动执行交易。</p>
+
+      <h3>核心特征</h3>
+
+      <ul>
+        <li><strong>去中心化</strong>：无需信任第三方机构</li>
+        <li><strong>开放性</strong>：任何人都可以访问和使用</li>
+        <li><strong>透明性</strong>：所有交易记录在链上公开可查</li>
+        <li><strong>可组合性</strong>：不同协议可以相互组合使用</li>
+        <li><strong>不可篡改性</strong>：智能合约一旦部署难以修改</li>
+      </ul>
+
+      <h2>二、借贷协议</h2>
+
+      <p>借贷协议是 DeFi 的核心之一，允许用户存入资金获得利息，或抵押资产借出其他代币。</p>
+
+      <h3>Aave 协议</h3>
+
+      <p>Aave 是最大的 DeFi 借贷协议之一，支持多种资产，提供独特的功能如闪电贷。</p>
+
+      <p><strong>核心功能</strong>：</p>
+
+      <ul>
+        <li><strong>普通借贷</strong>：支持稳定币利率和可变利率</li>
+        <li><strong>闪电贷</strong>：无需抵押，在一个区块内完成借款和还款</li>
+        <li><strong>风险参数</strong>：清算阈值、清算奖励、储备因子</li>
+      </ul>
+
+      <h3>Compound 协议</h3>
+
+      <p>Compound 是最早的 DeFi 借贷协议之一，以简化设计著称。</p>
+
+      <p><strong>核心机制</strong>：</p>
+
+      <ul>
+        <li><strong>cToken 模型</strong>：存入资产时获得 cToken</li>
+        <li><strong>跳增利率模型</strong>：低利用率区间利率低，高利用率区间利率迅速上升</li>
+        <li><strong>COMP 治理代币</strong>：用户可以获得 COMP 代币作为治理奖励</li>
+      </ul>
+
+      <h2>三、去中心化交易所（DEX）</h2>
+
+      <p>DEX 不需要订单簿，而是通过自动化做市商（AMM）机制自动定价。</p>
+
+      <h3>Uniswap</h3>
+
+      <p>Uniswap 是最大的 DEX 之一。</p>
+
+      <p><strong>Uniswap V2</strong>：使用 <code>x * y = k</code> 恒定乘积公式</p>
+
+      <p><strong>Uniswap V3</strong>：引入集中流动性，提高资本利用率</p>
+
+      <h3>Curve Finance</h3>
+
+      <p>Curve 专注于稳定币交易，优化大额交易的滑点。</p>
+
+      <h2>四、稳定币</h2>
+
+      <ul>
+        <li><strong>法币抵押</strong>：USDT、USDC、BUSD</li>
+        <li><strong>加密货币抵押</strong>：DAI、sUSD</li>
+        <li><strong>算法稳定币</strong>：UST（已崩盘）、FRAX、LUSD</li>
+      </ul>
+
+      <h2>五、流动性挖矿</h2>
+
+      <p>用户提供流动性获得代币奖励。</p>
+
+      <h2>六、衍生品</h2>
+
+      <ul>
+        <li><strong>永续合约</strong>：dYdX、GMX、Hyperliquid</li>
+        <li><strong>期权</strong>：Lyra、Dopex</li>
+        <li><strong>合成资产</strong>：Synthetix</li>
+      </ul>
+
+      <h2>七、跨链桥</h2>
+
+      <ul>
+        <li><strong>LayerZero</strong>：全链互操作协议</li>
+        <li><strong>Chainlink CCIP</strong>：跨链互操作性协议</li>
+        <li><strong>Hop Protocol</strong>：跨链桥和 Rollup 之间的快速转账</li>
+      </ul>
+
+      <h2>八、DeFi 风险分析</h2>
+
+      <h3>智能合约风险</h3>
+
+      <ul>
+        <li><strong>代码漏洞</strong>：重入攻击、整数溢出等</li>
+        <li><strong>预言机操纵</strong>：价格数据被操控</li>
+        <li><strong>流动性撤离</strong>：流动性突然撤出</li>
+      </ul>
+
+      <h3>市场风险</h3>
+
+      <ul>
+        <li><strong>无常损失</strong>：AMM 流动性提供者的价格风险</li>
+        <li><strong>杠杆清算</strong>：抵押品价值下跌导致清算</li>
+        <li><strong>协议风险</strong>：协议被黑或故障</li>
+      </ul>
+
+      <h2>九、学习资源</h2>
+
+      <ul>
+        <li><a href="https://docs.aave.com" target="_blank">Aave Docs</a></li>
+        <li><a href="https://docs.compound.finance" target="_blank">Compound Docs</a></li>
+        <li><a href="https://docs.uniswap.org" target="_blank">Uniswap Docs</a></li>
+        <li><a href="https://docs.curve.fi" target="_blank">Curve Docs</a></li>
+      </ul>
+
+      <h2>十、总结</h2>
+
+      <p>DeFi 是区块链领域最具创新性的领域之一。本文深入研究了借贷协议、DEX、稳定币、流动性挖矿、衍生品和跨链桥等核心协议。理解这些协议的机制和风险，对于参与 DeFi 至关重要。</p>
+
+      <blockquote>
+        <strong>⚠️ 重要提醒</strong>：DeFi 投资有风险，只投资能承受损失的资金。本文不构成投资建议。
+      </blockquote>
+    </div>
+
+    <div class="article-footer">
+      <p>最后更新：2026-02-08</p>
+      <p>作者：Pheglovog</p>
+      <a href="/pheglovog-site/blog.html" class="back-link">← 返回博客列表</a>
+    </div>
+  </article>
+</body>
+</html>

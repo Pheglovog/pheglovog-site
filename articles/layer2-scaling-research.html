@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Layer2 扩容方案深度研究 - 深入了解 Optimistic Rollup、ZK Rollup、State Channels 和侧链">
+  <meta name="keywords" content="Layer2, 扩容方案, Optimistic Rollup, ZK Rollup, Arbitrum, Optimism, zkSync, StarkNet">
+  <meta name="author" content="Pheglovog">
+  <title>Layer2 扩容方案深度研究 - Pheglovog</title>
+  <link rel="canonical" href="https://pheglovog.github.io/pheglovog-site/articles/layer2-scaling-research.html">
+
+  <style>
+    /* 全局样式 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+    .nav { display: flex; gap: 32px; }
+    .nav a {
+      font-size: 15px;
+      color: #666;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav a:hover { color: #1a1a1a; }
+    .nav a.active { color: #1a1a1a; font-weight: 600; }
+
+    /* Article */
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      background: #fff;
+    }
+    .article-header {
+      margin-bottom: 40px;
+    }
+    .article-meta {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .article-title {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background: #f0f0f0;
+      color: #666;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .content { margin-bottom: 60px; }
+    .content h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 48px 0 24px;
+      letter-spacing: -0.5px;
+    }
+    .content h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 32px 0 16px;
+    }
+    .content p {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .content ul, .content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .content li {
+      margin-bottom: 12px;
+    }
+    .content code {
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: "Fira Code", "SF Mono", "Monaco", "Courier New", monospace;
+      font-size: 14px;
+      color: #d63384;
+    }
+    .content pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .content pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    /* Table */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+    .content th,
+    .content td {
+      border: 1px solid #e5e5e5;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .content th {
+      background: #fafafa;
+      font-weight: 600;
+    }
+
+    /* Blockquote */
+    .content blockquote {
+      border-left: 4px solid #007bff;
+      padding-left: 20px;
+      margin: 24px 0;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Footer */
+    .article-footer {
+      padding-top: 40px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .article-footer p {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .back-link {
+      display: inline-block;
+      color: #007bff;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .article-title { font-size: 32px; }
+      .content h2 { font-size: 24px; }
+      .content h3 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="/pheglovog-site/" class="logo">Pheglovog</a>
+      <nav class="nav">
+        <a href="/pheglovog-site/index.html">首页</a>
+        <a href="/pheglovog-site/projects.html">项目</a>
+        <a href="/pheglovog-site/blog.html" class="active">博客</a>
+        <a href="/pheglovog-site/about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article -->
+  <article>
+    <div class="article-header">
+      <div class="article-meta">2026-02-08 • 约 12 分钟阅读</div>
+      <h1 class="article-title">Layer2 扩容方案深度研究</h1>
+      <div class="article-tags">
+        <span class="tag">Layer2</span>
+        <span class="tag">扩容方案</span>
+        <span class="tag">Optimistic Rollup</span>
+        <span class="tag">ZK Rollup</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>Layer2 是建立在 Layer1（如以太坊）之上的扩容解决方案。通过将部分交易转移到链下处理，Layer2 提高吞吐量并降低费用。本文深入研究 Optimistic Rollup、ZK Rollup、State Channels 和侧链等方案。</p>
+
+      <h2>一、Layer2 基础概念</h2>
+
+      <p>以太坊的主要问题：低吞吐量（约 15 TPS）、高 Gas 费。Layer2 通过在链下处理交易，将数据打包发布到链上，解决这些问题。</p>
+
+      <h2>二、Optimistic Rollup</h2>
+
+      <p>Optimistic Rollup 假设所有交易都是正确的，如果有人认为交易有问题，可以提出挑战。</p>
+
+      <h3>Arbitrum</h3>
+
+      <p>Arbitrum 是最受欢迎的 Optimistic Rollup 方案之一，支持 AnyTrust 模式进一步降低费用。</p>
+
+      <h3>Optimism</h3>
+
+      <p>Optimism 是另一个主要的 Optimistic Rollup 方案，Bedrock 升级带来了更低的费用和更快的提款。</p>
+
+      <h2>三、ZK Rollup</h2>
+
+      <p>ZK Rollup 使用零知识证明来验证交易的正确性，无需挑战期。</p>
+
+      <h3>zkSync Era</h3>
+
+      <p>zkSync Era 是最成熟的 ZK Rollup 方案之一，完全 EVM 兼容，支持账户抽象。</p>
+
+      <h3>StarkNet</h3>
+
+      <p>StarkNet 是基于 STARK 的 ZK Rollup，使用自定义语言 Cairo。</p>
+
+      <h2>四、Gas 费用对比</h2>
+
+      <table>
+        <tr>
+          <th>方案</th>
+          <th>单笔交易费用</th>
+          <th>提款时间</th>
+          <th>TPS</th>
+        </tr>
+        <tr>
+          <td>以太坊 L1</td>
+          <td>1-100 USD</td>
+          <td>15s</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>Arbitrum</td>
+          <td>0.001-0.01 USD</td>
+          <td>7天</td>
+          <td>40,000</td>
+        </tr>
+        <tr>
+          <td>Optimism</td>
+          <td>0.001-0.01 USD</td>
+          <td>7天</td>
+          <td>4,000</td>
+        </tr>
+        <tr>
+          <td>zkSync</td>
+          <td>0.0001-0.001 USD</td>
+          <td>1小时</td>
+          <td>2,000</td>
+        </tr>
+        <tr>
+          <td>Polygon</td>
+          <td>0.00001-0.0001 USD</td>
+          <td>5分钟</td>
+          <td>7,000</td>
+        </tr>
+      </table>
+
+      <h2>五、跨链互操作性</h2>
+
+      <ul>
+        <li><strong>LayerZero</strong>：全链互操作协议</li>
+        <li><strong>Chainlink CCIP</strong>：跨链互操作性协议</li>
+        <li><strong>Hop Protocol</strong>：跨链桥和 Rollup 之间的快速转账</li>
+      </ul>
+
+      <h2>六、安全性分析</h2>
+
+      <p>Optimistic Rollup 依赖欺诈证明，ZK Rollup 依赖密码学证明，侧链依赖自身共识。</p>
+
+      <h2>七、学习资源</h2>
+
+      <ul>
+        <li><a href="https://docs.arbitrum.io" target="_blank">Arbitrum Docs</a></li>
+        <li><a href="https://docs.optimism.io" target="_blank">Optimism Docs</a></li>
+        <li><a href="https://docs.zksync.io" target="_blank">zkSync Docs</a></li>
+        <li><a href="https://docs.starknet.co" target="_blank">StarkNet Docs</a></li>
+      </ul>
+
+      <h2>八、总结</h2>
+
+      <p>Layer2 是以太坊扩容的关键方向。本文深入研究了 Optimistic Rollup（Arbitrum、Optimism）、ZK Rollup（zkSync、StarkNet）等方案，分析了 Gas 费用和安全性。</p>
+    </div>
+
+    <div class="article-footer">
+      <p>最后更新：2026-02-08</p>
+      <p>作者：Pheglovog</p>
+      <a href="/pheglovog-site/blog.html" class="back-link">← 返回博客列表</a>
+    </div>
+  </article>
+</body>
+</html>

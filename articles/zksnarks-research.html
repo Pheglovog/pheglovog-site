@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="零知识证明（zk-SNARKs）深度研究 - 深入了解零知识证明的原理、应用场景和主要项目">
+  <meta name="keywords" content="零知识证明, zk-SNARKs, zk-STARKs, Zcash, Aztec, 隐私保护">
+  <meta name="author" content="Pheglovog">
+  <title>零知识证明深度研究 - Pheglovog</title>
+  <link rel="canonical" href="https://pheglovog.github.io/pheglovog-site/articles/zksnarks-research.html">
+
+  <style>
+    /* 全局样式 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+    .nav { display: flex; gap: 32px; }
+    .nav a {
+      font-size: 15px;
+      color: #666;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav a:hover { color: #1a1a1a; }
+    .nav a.active { color: #1a1a1a; font-weight: 600; }
+
+    /* Article */
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      background: #fff;
+    }
+    .article-header {
+      margin-bottom: 40px;
+    }
+    .article-meta {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .article-title {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background: #f0f0f0;
+      color: #666;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .content { margin-bottom: 60px; }
+    .content h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 48px 0 24px;
+      letter-spacing: -0.5px;
+    }
+    .content h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 32px 0 16px;
+    }
+    .content p {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .content ul, .content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .content li {
+      margin-bottom: 12px;
+    }
+    .content code {
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: "Fira Code", "SF Mono", "Monaco", "Courier New", monospace;
+      font-size: 14px;
+      color: #d63384;
+    }
+
+    /* Blockquote */
+    .content blockquote {
+      border-left: 4px solid #007bff;
+      padding-left: 20px;
+      margin: 24px 0;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Footer */
+    .article-footer {
+      padding-top: 40px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .article-footer p {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .back-link {
+      display: inline-block;
+      color: #007bff;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .article-title { font-size: 32px; }
+      .content h2 { font-size: 24px; }
+      .content h3 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="/pheglovog-site/" class="logo">Pheglovog</a>
+      <nav class="nav">
+        <a href="/pheglovog-site/index.html">首页</a>
+        <a href="/pheglovog-site/projects.html">项目</a>
+        <a href="/pheglovog-site/blog.html" class="active">博客</a>
+        <a href="/pheglovog-site/about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article -->
+  <article>
+    <div class="article-header">
+      <div class="article-meta">2026-02-08 • 约 10 分钟阅读</div>
+      <h1 class="article-title">零知识证明（zk-SNARKs）深度研究</h1>
+      <div class="article-tags">
+        <span class="tag">零知识证明</span>
+        <span class="tag">zk-SNARKs</span>
+        <span class="tag">隐私保护</span>
+        <span class="tag">区块链扩容</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>零知识证明（Zero-Knowledge Proof, ZKP）是一种密码学技术，允许证明者向验证者证明某个陈述是真的，而不泄露任何其他信息。本文深入研究 zk-SNARKs 的原理、应用场景和主要项目。</p>
+
+      <h2>一、零知识证明基础</h2>
+
+      <p>零知识证明有三个核心特性：</p>
+
+      <ul>
+        <li><strong>完整性</strong>：如果陈述是真的，诚实的证明者总能使验证者相信</li>
+        <li><strong>可靠性</strong>：如果陈述是假的，作弊的证明者几乎不可能使验证者相信</li>
+        <li><strong>零知识性</strong>：除了陈述本身的真实性外，验证者学不到任何其他信息</li>
+      </ul>
+
+      <h2>二、zk-SNARKs 原理</h2>
+
+      <p>zk-SNARKs 将计算转化为数学问题，生成简洁的证明。</p>
+
+      <ul>
+        <li><strong>电路设计</strong>：将计算转换为算术电路</li>
+        <li><strong>可信设置</strong>：生成公共参考串 (CRS)</li>
+        <li><strong>证明生成</strong>：使用私密输入和公共输入生成证明</li>
+        <li><strong>证明验证</strong>：验证者检查证明</li>
+      </ul>
+
+      <h2>三、应用场景</h2>
+
+      <ul>
+        <li><strong>区块链扩容</strong>：zk-Rollup（zkSync、StarkNet）</li>
+        <li><strong>隐私保护</strong>：匿名交易（Zcash、Tornado Cash）</li>
+        <li><strong>数据完整性</strong>：可验证计算</li>
+      </ul>
+
+      <h2>四、主要项目</h2>
+
+      <ul>
+        <li><strong>Zcash</strong>：第一个使用 zk-SNARKs 的隐私币</li>
+        <li><strong>Aztec</strong>：以太坊上的隐私智能合约平台</li>
+        <li><strong>Mina Protocol</strong>：使用 zk-SNARKs 的轻量级区块链</li>
+      </ul>
+
+      <h2>五、学习资源</h2>
+
+      <ul>
+        <li><a href="https://zips.z.cash" target="_blank">Zcash Protocol Specs</a></li>
+        <li><a href="https://docs.aztec.network" target="_blank">Aztec Docs</a></li>
+        <li><a href="https://docs.mina.protocol.com" target="_blank">Mina Protocol Docs</a></li>
+      </ul>
+
+      <h2>六、总结</h2>
+
+      <p>零知识证明是密码学领域的重要技术，广泛应用于隐私保护和区块链扩容。理解其原理和应用，对于参与区块链开发至为重要。</p>
+
+      <blockquote>
+        <strong>⚠️ 重要提醒</strong>：本文仅用于学习目的，不构成投资建议。
+      </blockquote>
+    </div>
+
+    <div class="article-footer">
+      <p>最后更新：2026-02-08</p>
+      <p>作者：Pheglovog</p>
+      <a href="/pheglovog-site/blog.html" class="back-link">← 返回博客列表</a>
+    </div>
+  </article>
+</body>
+</html>
